@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+<div class="container mt-5 ">
+  <!-- Products Section -->
+  <h2>Products</h2>
+  <div id="product-list" class="row "><!-- This is where the product cards will be appended -->
+      
+      <!-- Your JavaScript will dynamically populate this area with product cards -->
+  </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js (required for Bootstrap) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<!-- Your custom JavaScript code -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Fetch products and update the product list
+  fetch('/api/products/')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Select the product-list container
+      const productList = document.getElementById('product-list');
+
+      // Loop through the data and create product cards
+      data.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'col-xl-4 col-lg-6 col-md-6 col-sm-6  mb-3';
+
+        const card = document.createElement('div');
+        card.className = 'card h-100'; // Set a fixed height for the card
+
+        const img = document.createElement('img');
+        img.src = product.image;
+        img.className = 'card-img-top';
+        img.alt = product.productname;
+
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card-body';
+
+        const title = document.createElement('h5');
+        title.className = 'card-title';
+        title.textContent = product.productname;
+
+        const description = document.createElement('p');
+        description.className = 'card-text';
+        description.textContent = product.description;
+
+        const price = document.createElement('p');
+        price.className = 'card-text';
+        price.textContent = 'Price: $' + parseFloat(product.price).toFixed(2);
+
+        cardBody.appendChild(title);
+        cardBody.appendChild(description);
+        cardBody.appendChild(price);
+
+        card.appendChild(img);
+        card.appendChild(cardBody);
+
+        productCard.appendChild(card);
+        productList.appendChild(productCard);
+      });
+    })
+    .catch(error => console.error('Error fetching products:', error));
+});
+
+</script>
+{% endblock %}
