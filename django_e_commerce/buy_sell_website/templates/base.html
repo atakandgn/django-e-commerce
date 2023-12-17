@@ -19,14 +19,15 @@
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar border-bottom border-body position-sticky" style="background-color: #40465c; padding: 20px 0; top: 0; z-index: 999;">
+  <nav class="navbar border-bottom border-body position-sticky"
+    style="background-color: #40465c; padding: 20px 0; top: 0; z-index: 999;">
     <div class="container-fluid">
-      <a class="navbar-brand">
+      <a href="/" class="navbar-brand">
         <img src="{% static 'images/logo.png' %}" alt="logo" width="300" height="50" class="object-fit-contain" />
       </a>
       <!-- search icon inside a search box with svg -->
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Ara" aria-label="Search" />
+      <form class="d-flex" action="{% url 'search_results' %}" method="get">
+        <input name="query" class="form-control me-2" type="search" placeholder="Ara" aria-label="Search" />
         <button class="btn btn-outline-success search-btn" type="submit" style="background-color: #fff;">
           <i class="fas fa-search"></i>
         </button>
@@ -65,7 +66,7 @@
     integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
     crossorigin="anonymous"></script>
 
-  <!-- Update the script tag to populate categories and subcategories with Font Awesome styling -->
+  <!-- Update the script tag to populate categories and subcategories without Font Awesome icon -->
   <script>
     // Define a state object to hold categories and subcategories
     const state = {};
@@ -108,13 +109,8 @@
               const categoryItem = document.createElement('li');
               categoryItem.classList.add('list-group-item');
               const categoryNameLink = document.createElement('a');
-              categoryNameLink.href = '#';
+              categoryNameLink.href = `{% url 'search_results' %}?category_id=${categoryId}`;
               categoryNameLink.classList.add('d-flex', 'align-items-center', 'fw-bold');
-
-              // Font Awesome Icon
-              const icon = document.createElement('i');
-              icon.classList.add('fas', 'fa-gear', 'me-2', 'fa-solid');
-              categoryNameLink.appendChild(icon);
 
               // Category Name
               categoryNameLink.textContent = category.categoryname;
@@ -127,7 +123,9 @@
                   const subcategoryItem = document.createElement('li');
                   subcategoryItem.classList.add('list-group-item');
                   const subcategoryNameLink = document.createElement('a');
-                  subcategoryNameLink.href = '#';
+
+                  // Update the subcategory link to include subcategory_id
+                  subcategoryNameLink.href = `{% url 'search_results' %}?subcategory_id=${subcategory.subcategoryid}`;
                   subcategoryNameLink.textContent = subcategory.subcategoryname;
                   subcategoryItem.appendChild(subcategoryNameLink);
                   subcategoryList.appendChild(subcategoryItem);
