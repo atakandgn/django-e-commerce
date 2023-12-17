@@ -9,12 +9,15 @@
         {% for product in search_results %}
           <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 mb-3">
             <div class="card h-100">
-              <img src="{{ product.image }}" alt="{{ product.productname }}" class="card-img-top object-fit-contain">
-              <div class="card-body">
-                <h5 class="card-title">{{ product.productname }}</h5>
-                <p class="card-text">{{ product.description }}</p>
-                <p class="card-text">Price: ${{ product.price|floatformat:2 }}</p>
-              </div>
+              <!-- Wrap the product information inside an anchor tag -->
+              <a href="{% url 'product_detail' product.ad_no %}">
+                <img src="{{product.image }}" alt="{{ product.productname }}" class="card-img-top object-fit-contain">
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.productname }}</h5>
+                  <p class="card-text">{{ product.description }}</p>
+                  <p class="card-text">Price: ${{ product.price|floatformat:2 }}</p>
+                </div>
+              </a>
             </div>
           </div>
         {% endfor %} 
