@@ -3,9 +3,54 @@
 {% extends 'base.html' %}
 
 {% block title %}Ürün Detay{% endblock %}
-
 {% block content %}
-    <h2>Ürün Detayı</h2>
-    <p>Bu sayfa ürün detayını içerir.</p>
-    <!-- Diğer içerik buraya eklenebilir -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="mb-4 text-center">{{ product.productname }}</h2>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-center justify-content-center border rounded-5">
+                <img src="{{ product.image }}" alt="{{ product.productname }}" class="object-fit-contain w-100 h-100 p-3 rounded-2">
+            </div>
+            <div class="col-md-6">
+                <div class="mt-4">
+                    <div class="mb-2 d-flex justify-content-between border-bottom p-3">
+                        <span class="fw-bold">Advertisement No:</span>
+                        <span>{{ product.ad_no }}</span>
+                    </div>
+                    <div class="mb-2 d-flex justify-content-between border-bottom p-3">
+                        <span class="fw-bold">City:</span>
+                        <span>{{ product.city }}</span>
+                    </div>
+                    <div class="mb-2 d-flex justify-content-between border-bottom p-3">
+                        <span class="fw-bold">Product Category:</span>
+                        <a href="{% url 'search_results' %}?category_id={{ product.category.categoryid }}">
+                            <span>{{ product.category.categoryname }}</span>
+                        </a>
+                    </div>
+                    <div class="mb-2 d-flex justify-content-between border-bottom p-3">
+                        <span class="fw-bold">Product Price:</span>
+                        <span>{{ product.price }} $</span>
+                    </div>
+                </div>
+                <div class="mt-3 d-flex justify-content-center">
+                    <button class="btn btn-outline-success btn-buy" id="buyButton"
+                    onclick="alert('You have successfully purchased the product!')"
+                    >
+                        <i class="fas fa-shopping-cart me-2"></i> Buy Now
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12 bg-light p-5">
+                <p class="lead">⚬ {{ product.description }}</p>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

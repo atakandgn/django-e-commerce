@@ -3,12 +3,12 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-<div class="container mt-5 ">
+<div class="container">
+  <h4>Anasayfa Vitrini</h4>
   <!-- Products Section -->
-  <h2>Products</h2>
-  <div id="product-list" class="row "><!-- This is where the product cards will be appended -->
-      
-      <!-- Your JavaScript will dynamically populate this area with product cards -->
+  <div id="product-list" class="row">
+    <!-- This is where the product cards will be appended -->
+    <!-- Your JavaScript will dynamically populate this area with product cards -->
   </div>
 </div>
 
@@ -16,62 +16,70 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
-<!-- Your custom JavaScript code -->
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  // Fetch products and update the product list
-  fetch('/api/products/')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Select the product-list container
-      const productList = document.getElementById('product-list');
+  document.addEventListener("DOMContentLoaded", function () {
+    // Fetch products and update the product list
+    fetch('/api/products/')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        // Select the product-list container
+        const productList = document.getElementById('product-list');
 
-      // Loop through the data and create product cards
-      data.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'col-xl-4 col-lg-6 col-md-6 col-sm-6  mb-3';
+        // Loop through the data and create product cards
+        data.forEach(product => {
+          // Create an anchor tag with a link to the product detail page
+          const productLink = document.createElement('a');
+          productLink.href = `/product/${product.ad_no}/`; // Use ad_no as the identifier
+          productLink.className = 'text-decoration-none text-dark'; 
 
-        const card = document.createElement('div');
-        card.className = 'card h-100'; // Set a fixed height for the card
+          const productCard = document.createElement('div');
+          productCard.className = 'col-xl-4 col-lg-6 col-md-6 col-sm-6 mb-3';
 
-        const img = document.createElement('img');
-        img.src = product.image;
-        img.className = 'card-img-top';
-        img.alt = product.productname;
+          const card = document.createElement('div');
+          card.className = 'card h-100'; // Set a fixed height for the card
 
-        const cardBody = document.createElement('div');
-        cardBody.className = 'card-body';
+          const img = document.createElement('img');
+          img.src = product.image;
+          img.className = 'card-img-top object-fit-contain';
+          img.alt = product.productname;
 
-        const title = document.createElement('h5');
-        title.className = 'card-title';
-        title.textContent = product.productname;
+          const cardBody = document.createElement('div');
+          cardBody.className = 'card-body';
 
-        const description = document.createElement('p');
-        description.className = 'card-text';
-        description.textContent = product.description;
+          const title = document.createElement('h5');
+          title.className = 'card-title text-truncate-2 mb-0 text-uppercase font-weight-bold';
+          title.textContent = product.productname;
+          // truncate text until 3 lines
+          const description = document.createElement('p');
+          description.className = 'card-text text-truncate-3';
+          description.textContent = product.description;
 
-        const price = document.createElement('p');
-        price.className = 'card-text';
-        price.textContent = 'Price: $' + parseFloat(product.price).toFixed(2);
+          const price = document.createElement('p');
+          price.className = 'card-text d-flex justify-content-end ';
+          price.textContent = 'Price: $' + parseFloat(product.price).toFixed(2);
 
-        cardBody.appendChild(title);
-        cardBody.appendChild(description);
-        cardBody.appendChild(price);
+          cardBody.appendChild(title);
+          cardBody.appendChild(description);
+          cardBody.appendChild(price);
 
-        card.appendChild(img);
-        card.appendChild(cardBody);
+          card.appendChild(img);
+          card.appendChild(cardBody);
 
-        productCard.appendChild(card);
-        productList.appendChild(productCard);
-      });
-    })
-    .catch(error => console.error('Error fetching products:', error));
-});
-
+          productLink.appendChild(card); // Wrap the card with the anchor tag
+          productCard.appendChild(productLink);
+          productList.appendChild(productCard);
+        });
+      })
+      .catch(error => console.error('Error fetching products:', error));
+  });
 </script>
+
+
 {% endblock %}
