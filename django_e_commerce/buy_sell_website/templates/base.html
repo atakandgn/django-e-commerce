@@ -2,145 +2,222 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Ana Sayfa{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <!-- Font Awesome CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}Ana Sayfa{% endblock %}</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <!-- Font Awesome CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
 
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-
-</head>
-
-<body>
-  <!-- Navbar -->
-  <nav class="navbar border-bottom border-body position-sticky"
-    style="background-color: #40465c; padding: 20px 0; top: 0; z-index: 999;">
-    <div class="container-fluid">
-      <a href="/" class="navbar-brand">
-        <img src="{% static 'images/logo.png' %}" alt="logo" width="300" height="50" class="object-fit-contain" />
-      </a>
-      <!-- search icon inside a search box with svg -->
-      <form class="d-flex" action="{% url 'search_results' %}" method="get">
-        <input name="query" class="form-control me-2" type="search" placeholder="Ara" aria-label="Search" />
-        <button class="btn btn-outline-success search-btn" type="submit" style="background-color: #fff;">
-          <i class="fas fa-search"></i>
-        </button>
-      </form>
-    </div>
-  </nav>
-
-  <!-- İçerik alanı -->
-  <div class="container mt-5">
-    <div class="d-lg-flex gap-4">
-      <!-- category sidebar -->
-      <div class="col-lg-3 category-sidebar">
-        <!-- Sidebar content -->
-        <ul id="category-list">
-          <!-- Categories and subcategories will be populated here -->
-        </ul>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar border-bottom border-body position-sticky">
+      <div class="container-fluid">
+        <a href="/" class="navbar-brand">
+          <img
+            src="{% static 'images/logo.png' %}"
+            alt="logo"
+            width="250"
+            height="50"
+            class="object-fit-contain nav-logo"
+          />
+        </a>
+        <!-- search icon inside a search box with svg -->
+        <form
+          class="d-flex nav-form"
+          action="{% url 'search_results' %}"
+          method="get"
+        >
+          <input
+            name="query"
+            class="form-control me-2"
+            type="search"
+            placeholder="Ara"
+            aria-label="Search"
+          />
+          <button class="btn-outline-success search-btn" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
       </div>
+    </nav>
 
-      <!-- Main content area -->
-      {% block content %}
-      <div class="col-md-9">
-        <!-- Your main content goes here -->
+    <!-- İçerik alanı -->
+    <div class="container mt-5">
+      <div class="d-lg-flex gap-4">
+        <!-- category sidebar -->
+        <div class="col-lg-3 category-sidebar">
+          <!-- Sidebar content -->
+          <ul id="category-list">
+            <!-- Categories and subcategories will be populated here -->
+          </ul>
+        </div>
+
+        <!-- Main content area -->
+        {% block content %}
+        <div class="col-md-9">
+          <!-- Your main content goes here -->
+        </div>
+        {% endblock %}
       </div>
-      {% endblock %}
+  
     </div>
-  </div>
 
-  <!-- Bootstrap JS ve Popper.js -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-    crossorigin="anonymous"></script>
+    <footer class="footer mt-5">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <a href="#">
+              <img
+                src="{% static 'images/logo.png' %}"
+                alt="logo"
+                width="250"
+                height="50"
+                class="object-fit-contain nav-logo"
+              />
+            </a>
+          </div>
+          <div class="footer-links">
+            <ul class="footer-menu">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <ul class="social-icons">
+              <li>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2023 Created by <a class="brand" href="https://github.com/atakandgn"> by Atakan Doğan</a></p>
+        </div>
+      </div>
+    </footer>
 
-  <!-- Update the script tag to populate categories and subcategories without Font Awesome icon -->
-  <script>
-    // Define a state object to hold categories and subcategories
-    const state = {};
+    <!-- Bootstrap JS ve Popper.js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
 
-    // Fetch categories and update the state
-    fetch('/api/categories/')
-      .then(response => response.json())
-      .then(categories => {
-        // Initialize the state object with empty arrays for each category
-        categories.forEach(category => {
-          state[category.categoryid] = {
-            categoryname: category.categoryname,
-            subcategories: [],
-          };
-        });
+    <!-- Update the script tag to populate categories and subcategories with product count -->
+    <script>
+      // Define a state object to hold categories and subcategories
+      const state = {};
 
-        // Fetch subcategories and update the state
-        fetch('/api/subcategories/')
-          .then(response => response.json())
-          .then(subcategories => {
-            // Group subcategories by category ID in the state object
-            subcategories.forEach(subcategory => {
-              const categoryId = subcategory.categoryid;
+      // Fetch categories and update the state
+      fetch("/api/categories/")
+        .then((response) => response.json())
+        .then((categories) => {
+          // Initialize the state object with empty arrays for each category
+          categories.forEach((category) => {
+            state[category.categoryid] = {
+              categoryname: category.categoryname,
+              product_count: category.product_count,
+              subcategories: [],
+            };
+          });
 
-              if (state[categoryId]) {
-                state[categoryId].subcategories.push({
-                  subcategoryid: subcategory.subcategoryid,
-                  subcategoryname: subcategory.subcategoryname,
-                });
+          // Fetch subcategories and update the state
+          fetch("/api/subcategories/")
+            .then((response) => response.json())
+            .then((subcategories) => {
+              // Group subcategories by category ID in the state object
+              subcategories.forEach((subcategory) => {
+                const categoryId = subcategory.categoryid;
+
+                if (state[categoryId]) {
+                  state[categoryId].subcategories.push({
+                    subcategoryid: subcategory.subcategoryid,
+                    subcategoryname: subcategory.subcategoryname,
+                    product_count: subcategory.product_count,
+                  });
+                }
+              });
+
+              // Access the DOM elements to populate categories and subcategories
+              const categoryList = document.getElementById("category-list");
+              for (const categoryId in state) {
+                const category = state[categoryId];
+                const categoryItem = document.createElement("li");
+                categoryItem.classList.add("list-group-item");
+                const categoryNameLink = document.createElement("a");
+                categoryNameLink.href = `{% url 'search_results' %}?category_id=${categoryId}`;
+                categoryNameLink.classList.add(
+                  "d-flex",
+                  "align-items-center",
+                  "fw-bold"
+                );
+
+                // Category Name with Product Count
+                categoryNameLink.textContent = `${category.categoryname} (${category.product_count})`;
+
+                // Add smallCount class only to the category count
+                categoryItem.appendChild(categoryNameLink);
+
+                if (category.subcategories.length > 0) {
+                  const subcategoryList = document.createElement("ul");
+                  subcategoryList.classList.add("list-group");
+                  category.subcategories.forEach((subcategory) => {
+                    const subcategoryItem = document.createElement("li");
+                    subcategoryItem.classList.add("list-group-item");
+                    const subcategoryNameLink = document.createElement("a");
+                    subcategoryNameLink.href = `{% url 'search_results' %}?subcategory_id=${subcategory.subcategoryid}`;
+                    subcategoryNameLink.textContent = `${subcategory.subcategoryname} (${subcategory.product_count})`;
+
+                    // Add smallCount class only to the subcategory count
+                    subcategoryItem.appendChild(subcategoryNameLink);
+                    subcategoryList.appendChild(subcategoryItem);
+                  });
+                  categoryItem.appendChild(subcategoryList);
+                }
+
+                categoryList.appendChild(categoryItem);
               }
-            });
-
-            // Now, the state object contains categories with their related subcategories
-            console.log(state);
-
-            // Access the DOM elements to populate categories and subcategories
-            const categoryList = document.getElementById('category-list');
-            for (const categoryId in state) {
-              const category = state[categoryId];
-              const categoryItem = document.createElement('li');
-              categoryItem.classList.add('list-group-item');
-              const categoryNameLink = document.createElement('a');
-              categoryNameLink.href = `{% url 'search_results' %}?category_id=${categoryId}`;
-              categoryNameLink.classList.add('d-flex', 'align-items-center', 'fw-bold');
-
-              // Category Name
-              categoryNameLink.textContent = category.categoryname;
-              categoryItem.appendChild(categoryNameLink);
-
-              if (category.subcategories.length > 0) {
-                const subcategoryList = document.createElement('ul');
-                subcategoryList.classList.add('list-group');
-                category.subcategories.forEach(subcategory => {
-                  const subcategoryItem = document.createElement('li');
-                  subcategoryItem.classList.add('list-group-item');
-                  const subcategoryNameLink = document.createElement('a');
-
-                  // Update the subcategory link to include subcategory_id
-                  subcategoryNameLink.href = `{% url 'search_results' %}?subcategory_id=${subcategory.subcategoryid}`;
-                  subcategoryNameLink.textContent = subcategory.subcategoryname;
-                  subcategoryItem.appendChild(subcategoryNameLink);
-                  subcategoryList.appendChild(subcategoryItem);
-                });
-                categoryItem.appendChild(subcategoryList);
-              }
-
-              categoryList.appendChild(categoryItem);
-            }
-          })
-          .catch(error => console.error('Error fetching subcategories:', error));
-      })
-      .catch(error => console.error('Error fetching categories:', error));
-  </script>
-
-</body>
-
+            })
+            .catch((error) =>
+              console.error("Error fetching subcategories:", error)
+            );
+        })
+        .catch((error) => console.error("Error fetching categories:", error));
+    </script>
+  </body>
 </html>

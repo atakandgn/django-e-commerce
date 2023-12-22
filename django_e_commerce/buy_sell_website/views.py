@@ -8,13 +8,12 @@ from .models import Categories, Products, Subcategories
 from django.db.models import Q,Count
 
 class CategoryListCreateView(generics.ListCreateAPIView):
-    queryset = Categories.objects.all()
+    queryset = Categories.objects.annotate(product_count=Count('products'))
     serializer_class = CategorySerializer
 
 class SubCategoryListCreateView(generics.ListCreateAPIView):
-    queryset = Subcategories.objects.all()
+    queryset = Subcategories.objects.annotate(product_count=Count('products'))
     serializer_class = SubCategorySerializer
-
 class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Products.objects.all()
     serializer_class = ProductSerializer
@@ -56,7 +55,6 @@ def search_results(request):
         Q(city__icontains=query)            # Search city containing the query
     )
 
-    # Pass the search results, query, and log_data to the template
     context = {'query': query, 'search_results': search_results}
     return render(request, 'search_results.html', context)
 

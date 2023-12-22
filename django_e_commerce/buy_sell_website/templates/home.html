@@ -3,9 +3,9 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container">
+  <h4>Anasayfa Vitrini</h4>
   <!-- Products Section -->
-  <h2>Products</h2>
   <div id="product-list" class="row">
     <!-- This is where the product cards will be appended -->
     <!-- Your JavaScript will dynamically populate this area with product cards -->
@@ -37,7 +37,7 @@
           // Create an anchor tag with a link to the product detail page
           const productLink = document.createElement('a');
           productLink.href = `/product/${product.ad_no}/`; // Use ad_no as the identifier
-          productLink.className = 'text-decoration-none text-dark'; // Optional: Styling for the link
+          productLink.className = 'text-decoration-none text-dark'; 
 
           const productCard = document.createElement('div');
           productCard.className = 'col-xl-4 col-lg-6 col-md-6 col-sm-6 mb-3';
@@ -54,15 +54,15 @@
           cardBody.className = 'card-body';
 
           const title = document.createElement('h5');
-          title.className = 'card-title';
+          title.className = 'card-title text-truncate-2 mb-0 text-uppercase font-weight-bold';
           title.textContent = product.productname;
-
+          // truncate text until 3 lines
           const description = document.createElement('p');
-          description.className = 'card-text';
+          description.className = 'card-text text-truncate-3';
           description.textContent = product.description;
 
           const price = document.createElement('p');
-          price.className = 'card-text';
+          price.className = 'card-text d-flex justify-content-end ';
           price.textContent = 'Price: $' + parseFloat(product.price).toFixed(2);
 
           cardBody.appendChild(title);
