@@ -9,3 +9,4 @@ pycryptodome==3.19.0
 sqlparse==0.4.4
 typing_extensions==4.8.0
 tzdata==2023.3
+uvicorn==0.15.0
