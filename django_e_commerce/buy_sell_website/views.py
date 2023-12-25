@@ -20,14 +20,12 @@ class ProductListCreateView(generics.ListCreateAPIView):
 
 
 def home(request):
-    # Your view logic here
     return render(request, 'home.html', {})
 
 def product_detail(request, product_id):
-    # Assuming 'ad_no' is the primary key field
+    # Get the product requested
     product = get_object_or_404(Products, ad_no=product_id)
 
-    # Pass the product data to the template
     context = {'product': product}
     return render(request, 'product_detail.html', context)
 
@@ -37,7 +35,7 @@ def search_results(request):
     category_id = request.GET.get('category_id', '')
     subcategory_id = request.GET.get('subcategory_id', '')
 
-    # Initialize the base queryset
+    #  Get all products
     base_queryset = Products.objects.all()
 
     # Filter by category if provided
@@ -48,7 +46,7 @@ def search_results(request):
     if subcategory_id:
         base_queryset = base_queryset.filter(subcategoryid=subcategory_id)
 
-    # Perform a case-insensitive search on productname, description, and city
+    # Filter by query if provided
     search_results = base_queryset.filter(
         Q(productname__icontains=query) |   # Search productname containing the query
         Q(description__icontains=query) |   # Search description containing the query
