@@ -35,14 +35,15 @@
             class="object-fit-contain nav-logo"
           />
         </a>
-        <!-- search icon inside a search box with svg -->
         <form
           class="d-flex nav-form"
           action="{% url 'search_results' %}"
           method="get"
+          onsubmit="return validateSearchForm()"
         >
           <input
             name="query"
+            id="search-input"
             class="form-control me-2"
             type="search"
             placeholder="Ara"
@@ -66,21 +67,19 @@
           </ul>
         </div>
 
-        <!-- Main content area -->
         {% block content %}
         <div class="col-md-9">
-          <!-- Your main content goes here -->
+          <!-- Main content -->
         </div>
         {% endblock %}
       </div>
-  
     </div>
 
     <footer class="footer mt-5">
       <div class="container">
         <div class="footer-content">
           <div class="footer-logo">
-            <a href="#">
+            <a href="/">
               <img
                 src="{% static 'images/logo.png' %}"
                 alt="logo"
@@ -92,31 +91,39 @@
           </div>
           <div class="footer-links">
             <ul class="footer-menu">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/">About</a></li>
+              <li><a href="/">Services</a></li>
+              <li><a href="/">Contact</a></li>
             </ul>
           </div>
           <div>
             <ul class="social-icons">
               <li>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a target="_blank" href="https://github.com/atakandgn"
+                  ><i class="fab fa-github"></i
+                ></a>
               </li>
               <li>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:atakandogan.info@gmail.com" target="_blank"
+                  ><i class="fab fa-google"></i
+                ></a>
               </li>
               <li>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.linkedin.com/in/atakandoan/"
+                  ><i class="fab fa-linkedin-in"></i
+                ></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2023 Created by <a class="brand" href="https://github.com/atakandgn"> by Atakan Doğan</a></p>
+          <p>
+            &copy; 2023 Created by
+            <a class="brand" href="https://github.com/atakandgn">
+              Atakan Doğan</a
+            >
+          </p>
         </div>
       </div>
     </footer>
@@ -138,8 +145,17 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- Update the script tag to populate categories and subcategories with product count -->
+   
     <script>
+      function validateSearchForm() {
+        var query = document.getElementById('search-input').value.trim();
+        if (query === '') {
+            // If the search input is empty, prevent form submission
+            alert('Please enter a search value!');
+            return false;
+        }
+        return true;
+    }
       // Define a state object to hold categories and subcategories
       const state = {};
 

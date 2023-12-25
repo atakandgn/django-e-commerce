@@ -4,7 +4,6 @@ body {
   scrollbar-color: rgb(158, 158, 167) rgba(0, 0, 0, 0.1);
 }
 
-/* Rounded Scrollbar */
 body::-webkit-scrollbar {
   width: 5px;
   border-radius: 50px;
@@ -29,12 +28,6 @@ a {
   text-decoration: none;
   color: #000;
 }
-
-/* .mainLayout {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-} */
 
 nav {
   background-color: #40465c;
@@ -161,7 +154,6 @@ nav {
   background-color: #e9ecef;
 }
 .brand{
-  /* italic and bold text */
   font: italic bold 20px Georgia, serif;
   border-bottom: 1px solid transparent;
   transition: 0.5s ease;
@@ -195,11 +187,11 @@ nav {
 }
 
 .card-img-top {
-  height: 200px; /* Set a fixed height for the images */
+  height: 200px; 
   padding: 10px;
 }
 
-/* Optional: Adjust the card height based on your design preferences */
+
 .card {
   height: 100%;
 }
