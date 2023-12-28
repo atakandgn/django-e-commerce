@@ -1,6 +1,6 @@
 # Django E-Commerce
 
-![E-Commerce](https://yourimageurl.com)
+![E-Commerce](https://github.com/atakandgn/django-e-commerce/assets/108396649/f2898d58-68cf-4612-b0c2-02efef357f79)
 
 > This Django project is a sophisticated E-Commerce platform that facilitates seamless product transactions. Users can browse product listings, view detailed product information, and utilize a powerful search functionality.
 
