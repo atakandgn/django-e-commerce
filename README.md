@@ -97,13 +97,13 @@ DATABASES = {
 
 3. If you are using virtualenv, activate your virtual environment: `source myenv/bin/activate`
 
-4. Install the required dependencies: `pip install ...`
+4. Install the required dependencies: `pip install requirements.txt`
 
 5. Create the database: `python manage.py migrate`
 
 6. Start the Django development server: `python manage.py runserver`
 
-The project should now be accessible at [http](http://127.0.0.1:8000).
+The project should now be accessible at [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ## Contact Information
 
