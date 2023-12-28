@@ -75,16 +75,29 @@ WSGI_APPLICATION = 'django_e_commerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'BuySellDB',
+#         'USER': 'postgres',
+#         'PASSWORD': '77yyuu',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+from decouple import config
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'BuySellDB',
-        'USER': 'postgres',
-        'PASSWORD': '77yyuu',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': config('DB_ENGINE'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
+        'OPTIONS': {'sslmode': config('DB_OPTIONS')},
     }
 }
+
 
 
 # Password validation
