@@ -62,6 +62,7 @@ DATABASES = {
         'PASSWORD': 'your_database_password',
         'HOST': 'your_neon_host_url',
         'PORT': 'your_neon_port',
+        'OPTIONS': {'sslmode': 'require'},
     }
 }
 ```
